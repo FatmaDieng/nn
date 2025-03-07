@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des étudiants</title>
+    <style>
+        /* Style général de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Titre de la page */
+        h1 {
+            color: #333;
+            margin-top: 50px;
+            font-size: 2.5em;
+        }
+
+        /* Liste des étudiants */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+
+        /* Liens de chaque étudiant */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Bouton Ajouter un étudiant */
+        .ajouter-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .ajouter-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Style pour les liens "Modifier" et "Supprimer" */
+        .modifier-btn, .supprimer-btn {
+            background-color: #ffc107;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .modifier-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .supprimer-btn {
+            background-color: #dc3545;
+        }
+
+        .supprimer-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des étudiants</h1>
+    <ul>
+        {% for etudiant in etudiants %}
+        <li>
+            <div>
+                <a href="{% url 'details_etudiant' id=etudiant.id %}">{{ etudiant.prenom }} {{ etudiant.nom }}</a>
+            </div>
+            <div>
+                <a href="{% url 'modifier_etudiant' id=etudiant.id %}" class="modifier-btn">Modifier</a>
+                <a href="{% url 'supprimer_etudiant' id=etudiant.id %}" class="supprimer-btn">Supprimer</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'ajouter_etudiant' %}" class="ajouter-btn">Ajouter un étudiant</a>
+</body>
+</html>
